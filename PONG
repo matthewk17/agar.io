@@ -1,0 +1,72 @@
+import pygame
+pygame.init()
+win = pygame.display.set_mode((700,500))
+
+x = 350
+y = 250
+
+paddle_y = 250
+paddle_x = 250
+
+xspeed = 2
+yspeed = 2
+
+while 1+1==2:
+  win.fill((0,0,0))
+  pygame.time.delay(10)
+
+
+  # Paddle2
+
+  pygame.draw.rect(win, (255,255,255), (0, paddle_x, 20, 100))
+
+  pygame.event.pump()
+  keys = pygame.key.get_pressed()
+  if keys[pygame.K_UP]:
+    paddle_y = paddle_y - 5
+  if keys[pygame.K_DOWN]:
+    paddle_y = paddle_y + 5
+  # if keys[pygame.K_w]:
+  #   paddle_x = paddle_x - 5
+  # if keys[pygame.K_s]:
+  #   paddle_x = paddle_x + 5
+
+  if y < paddle_x :
+    paddle_x = paddle_x - 5
+  if y > paddle_x:
+    paddle_x = paddle_x + 5
+      
+
+  if paddle_x < 0:
+    paddle_x = 0
+  if paddle_x > 400:
+    paddle_x =  400
+
+
+  # Paddle1
+  pygame.draw.rect(win, (255,255,255), (680,paddle_y,20,100))
+
+      
+  if paddle_y < 0:
+    paddle_y = 0
+  if paddle_y > 400:
+    paddle_y = 400
+
+  # Ball
+  x = x + xspeed
+  y = y + yspeed
+  pygame.draw.rect(win, (255,255,255), (x,y,20,20))
+  pygame.display.update()
+
+  if y>500:
+    yspeed = yspeed*- 1
+
+  if x>660 and paddle_y < y < paddle_y + 100:
+    xspeed = xspeed*- 1
+
+  if x<20 and paddle_x < y < paddle_x+100:
+    xspeed = xspeed*- 1
+
+  if y<0:
+    yspeed = yspeed*- 1
+  
